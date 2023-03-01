@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiExceptionController {
 
     @GetMapping("/api/member/{id}")
-    public MemberDto getMember(@PathVariable("id") String id) {
+    public MemberDto getMember(@PathVariable("id") String id) throws ClassNotFoundException {
         if(id.equals("ex")) {
             throw new RuntimeException("잘못된 사용자!");
+        }
+
+        // 예를들어 "bad"라는 문자열이 잘못된 값이라고 해보자...
+        if(id.equals("bad")){
+            throw new IllegalArgumentException("잘못된 입력 값");
         }
 
         return new MemberDto(id, "hello " + id);
