@@ -2,6 +2,7 @@ package com.hello.exception.api;
 
 import com.hello.exception.common.ErrorResult;
 import com.hello.exception.exception.UserException;
+import com.hello.exception.exception.UserExceptionChildException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,7 @@ public class ApiExceptionV2Controller {
     }
 
     @GetMapping("/member/{id}")
-    public MemberDto getMember(@PathVariable("id") String id) {
+    public MemberDto getMember(@PathVariable("id") String id) throws Exception {
         if(id.equals("ex")) {
             throw new RuntimeException("잘못된 사용자!");
         }
@@ -68,7 +69,11 @@ public class ApiExceptionV2Controller {
         }
 
         if(id.contains("user-ex")) {
-            throw new UserException("Error User!");
+            throw new UserExceptionChildException("Error User!");
+        }
+
+        if(id.contains("exception")) {
+            throw new Exception("예외발생");
         }
 
         return new MemberDto(id, "hello " + id);
