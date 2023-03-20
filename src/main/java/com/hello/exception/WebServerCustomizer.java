@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * 의미가 있기보단 Servlet Container에서 제공
  * 말 그대로 WebServer(Tomcat)을 Custimizing한다는 것
  */
-@Component
+//@Component
 public class WebServerCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
 
     @Override
